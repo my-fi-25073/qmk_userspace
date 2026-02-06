@@ -35,6 +35,7 @@ This is a template repository which allows for an external set of QMK keymaps to
 1. `cd` into this repository's clone directory
 1. Set global userspace path: `qmk config user.overlay_dir="$(realpath .)"` -- you MUST be located in the cloned userspace location for this to work correctly
     * This will be automatically detected if you've `cd`ed into your userspace repository, but the above makes your userspace available regardless of your shell location.
+1. If you added custom keyboards under `keyboards/`, symlink them into your QMK firmware tree so `qmk compile -kb <keyboard>` can find them — see [docs/custom-keyboard-without-symlink.md](docs/custom-keyboard-without-symlink.md).
 1. Compile normally: `qmk compile -kb your_keyboard -km your_keymap` or `make your_keyboard:your_keymap`
 
 Alternatively, if you configured your build targets above, you can use `qmk userspace-compile` to build all of your userspace targets at once.
