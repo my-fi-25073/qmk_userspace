@@ -1,4 +1,5 @@
 #include "my_keycode.h"
+#include "wait.h"
 
 static inline void press_and_release(uint16_t mod)
 {
@@ -55,8 +56,17 @@ static inline void press_word_move(bool pressed, os_variant_t host, bool move_le
 static bool send_os_language_switch(bool pressed, os_variant_t host)
 {
     if (!pressed) return false;
-    if (host == OS_WINDOWS) { tap_code(KC_RALT); }
-    else { press_mods_and_tap(KC_LCTL, KC_LCTL, KC_SPACE, host); }
+    if (host == OS_WINDOWS)
+    {
+        tap_code(KC_RALT);
+    }
+    else
+    {
+        register_code(KC_LCTL);
+        tap_code(KC_SPACE);
+        wait_ms(80);
+        unregister_code(KC_LCTL);
+    }
     return false;
 }
 
